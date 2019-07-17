@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 >
 > **it's designed only for education purposes**
 
+All relevant codes are in `/src/App.js`.
+
 # Introduction
 
 This is an example how to use cognito's social auth in ReactJS.
