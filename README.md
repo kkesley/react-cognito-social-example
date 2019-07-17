@@ -22,6 +22,8 @@ Then, go to `credentials` ([https://console.developers.google.com/apis/credentia
 
 The `ClientID` is in the form of **"xxxxxxxxxx.apps.googleusercontent.com"**.
 
+Used third-party library [`react-google-login`](https://github.com/anthonyjgrove/react-google-login)
+
 ### For development purposes.
 
 You need to enable the domain of your website. This includes your `localhost`.
@@ -40,6 +42,10 @@ Include `http` and `https` as facebook requires https. And include address with 
 Follow this tutorial: [https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)
 
 In the `App`, you need your `App ID` to login.
+
+Used third-party library [`react-facebook-login`](https://github.com/keppelen/react-facebook-login)
+
+> Facebook doesn't allow `http` anymore. Therefore, we need to run the app with https. Check `/.env` file. It sets `HTTPS=true` so that it will run with `https://`. Your browser will complain about this. Just click `proceed`.
 
 
 # Special cases for this repo
