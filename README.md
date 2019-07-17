@@ -1,68 +1,48 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+> The app in this example is far from production ready. This example only demonstrates how to login to cognito with social auth in react.
+>
+> **it's designed only for education purposes**
 
-In the project directory, you can run:
+# Introduction
 
-### `npm start`
+This is an example how to use cognito's social auth in ReactJS.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A prior `IdentityPool` is required.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Social Auth configuration
 
-### `npm test`
+## Google Signin
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Follow this tutorial: [https://developers.google.com/identity/sign-in/web/sign-in](https://developers.google.com/identity/sign-in/web/sign-in)
 
-### `npm run build`
+Then, go to `credentials` ([https://console.developers.google.com/apis/credentials](https://console.developers.google.com/apis/credentials)) to get the `ClientID`.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The `ClientID` is in the form of **"xxxxxxxxxx.apps.googleusercontent.com"**.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### For development purposes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You need to enable the domain of your website. This includes your `localhost`.
 
-### `npm run eject`
+Click edit on your credentials, then insert these URIs in **"Authorized JavaScript origins"** and **"Authorized redirect URIs"**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. https://localhost:3000
+2. https://localhost
+3. http://localhost:3000
+4. http://localhost
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Include `http` and `https` as facebook requires https. And include address with React's port (default to `3000`) and the default localhost.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Facebook Signin
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Follow this tutorial: [https://developers.facebook.com/docs/facebook-login/](https://developers.facebook.com/docs/facebook-login/)
 
-## Learn More
+In the `App`, you need your `App ID` to login.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Special cases for this repo
 
-### Code Splitting
+The Google Signin in this repo is an example of **linking another social provider to an existing identity in cognito**. Therefore, if you want to run this app, you need to login with `Facebook` first, then login with `Google`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Your identity will have 2 linked logins afterwards.
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
