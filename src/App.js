@@ -3,6 +3,8 @@ import './App.css';
 import FacebookLogin from 'react-facebook-login';
 import AWS from 'aws-sdk'
 import GoogleLogin from 'react-google-login';
+import aws4 from 'aws4'
+import axios from 'axios'
 AWS.config.region = 'ap-southeast-2'
 function App() {
   return (
@@ -25,6 +27,44 @@ function App() {
                 console.log(err)
                   // Access AWS resources here.
                   console.log(AWS.config.credentials)
+
+                  // Below is how to sign aws request using `aws4` lib
+                  var creds = {
+                    secretAccessKey: AWS.config.credentials.secretAccessKey,
+                    accessKeyId: AWS.config.credentials.accessKeyId,
+                    sessionToken: AWS.config.credentials.sessionToken,
+                  }
+
+                  const body = {
+                    "url": "https://........."
+                  }
+
+                  let request = {
+                    host: 'example.com', //API host
+                    service: 'execute-api',
+                    region: 'ap-southeast-2', //AWS region
+                    method: 'POST',
+                    url: `https://example.com/prod/http`, //combination of host and path
+                    data: body, // the body of this request
+                    body: JSON.stringify(body), // aws4 looks for body; axios for data
+                    path: '/prod/http', //API path (include the stage)
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  }
+
+                  var signedReq = aws4.sign(request, creds)
+
+                  //delete the Host and Content-Length as it throws error in browsers
+                  delete signedReq.headers['Host']
+                  delete signedReq.headers['Content-Length']
+                  axios(signedReq)
+                  .then(function (response) {
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
               });
           }} />
         <GoogleLogin
